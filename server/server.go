@@ -10,9 +10,9 @@ import (
 )
 
 const (
-	tcpProtocol = "tcp"
-	port        = "50051"
-	logVersion  = 5
+	tcpProtocol    = "tcp"
+	port           = "50051"
+	traceVerbosity = 5
 )
 
 // server is used to implement pb.StaffServiceServer.
@@ -26,7 +26,7 @@ func (s *staffServer) GetStaffMember(ctx context.Context, req *pb.GetStaffMember
 ) {
 	logger := klog.FromContext(ctx)
 	staffMemberID := req.GetId()
-	logger.V(logVersion).Info("Received GetStaffMember request", "staffMemberID", staffMemberID)
+	logger.V(traceVerbosity).Info("Received GetStaffMember request", "staffMemberID", staffMemberID)
 	// TODO: implement the method
 	return &pb.GetStaffMemberResponse{}, nil
 }
@@ -39,7 +39,7 @@ func (s *staffServer) GetCoursesList(ctx context.Context, req *pb.GetCoursesList
 	firstName := req.GetStaffMember().GetFirstName()
 	secondName := req.GetStaffMember().GetSecondName()
 	semester := req.GetSemester()
-	logger.V(logVersion).Info("Received GetCoursesList request",
+	logger.V(traceVerbosity).Info("Received GetCoursesList request",
 		"firstName", firstName, "secondName", secondName, "semester", semester)
 	// TODO: implement the method
 	return &pb.GetCoursesListResponse{}, nil
@@ -52,7 +52,7 @@ func (s *staffServer) CreateStaffMember(ctx context.Context, req *pb.CreateStaff
 	logger := klog.FromContext(ctx)
 	firstName := req.GetStaffMember().GetFirstName()
 	secondName := req.GetStaffMember().GetSecondName()
-	logger.V(logVersion).Info("Received CreateStaffMember request",
+	logger.V(traceVerbosity).Info("Received CreateStaffMember request",
 		"firstName", firstName, "secondName", secondName)
 	// TODO: implement the method
 	return &pb.CreateStaffMemberResponse{}, nil
@@ -65,7 +65,7 @@ func (s *staffServer) UpdateStaffMember(ctx context.Context, req *pb.UpdateStaff
 	logger := klog.FromContext(ctx)
 	firstName := req.GetStaffMember().GetFirstName()
 	secondName := req.GetStaffMember().GetSecondName()
-	logger.V(logVersion).Info("Received UpdateStaffMember request",
+	logger.V(traceVerbosity).Info("Received UpdateStaffMember request",
 		"firstName", firstName, "secondName", secondName)
 
 	// TODO: implement the method
@@ -78,7 +78,7 @@ func (s *staffServer) DeleteStaffMember(ctx context.Context, req *pb.DeleteStaff
 ) {
 	logger := klog.FromContext(ctx)
 	staffMemberID := req.GetStaffMember().GetId()
-	logger.V(logVersion).Info("Received DeleteStaffMember request", "staffMemberID", staffMemberID)
+	logger.V(traceVerbosity).Info("Received DeleteStaffMember request", "staffMemberID", staffMemberID)
 	// TODO: implement the method
 	return &pb.DeleteStaffMemberResponse{}, nil
 }
